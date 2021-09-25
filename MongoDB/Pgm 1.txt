@@ -1,0 +1,158 @@
+> use MyCev;
+switched to db MyCev
+> db.createCollection("db_mca");
+{ "ok" : 1 }
+> db.createCollection("db_cs");
+{ "ok" : 1 }
+> db.db_cs.insert([
+... {
+... "regNo":1,
+... "Name":"Aswana",
+... "age":20 },
+... {
+... "regNo":2,
+... "Name":"Rahul",
+... "age":18 },
+... {
+... "regNo":3,
+... "Name":"Rupesh",
+... "age":20 },
+... {
+... "regNo":4,
+... "Name":"Ammu",
+... "age":16 }
+... ]);
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 4,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+
+> db.db_cs.insert([ { "regNo":5, "Name":"Achu", "age":22 }, { "regNo":6, "Name":"Aru", "age":16 }, { "regNo":7, "Name":"Anusree", "age":21 },
+ { "regNo":8, "Name":"Arathi", "age":20 }, { "regNo":9, "Name":"Aswathi", "age":24 }, { "regNo":10, "Name":"Aswanth", "age":21 } ]);
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 6,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+> db.db_cs.find();
+{ "_id" : ObjectId("614aaae23e1fd0dc7f348391"), "regNo" : 1, "Name" : "Aswana", "age" : 20 }
+{ "_id" : ObjectId("614aaae23e1fd0dc7f348392"), "regNo" : 2, "Name" : "Rahul", "age" : 18 }
+{ "_id" : ObjectId("614aaae23e1fd0dc7f348393"), "regNo" : 3, "Name" : "Rupesh", "age" : 20 }
+{ "_id" : ObjectId("614aaae23e1fd0dc7f348394"), "regNo" : 4, "Name" : "Ammu", "age" : 16 }
+{ "_id" : ObjectId("614aad603e1fd0dc7f348395"), "regNo" : 5, "Name" : "Achu", "age" : 22 }
+{ "_id" : ObjectId("614aad603e1fd0dc7f348396"), "regNo" : 6, "Name" : "Aru", "age" : 16 }
+{ "_id" : ObjectId("614aad603e1fd0dc7f348397"), "regNo" : 7, "Name" : "Anusree", "age" : 21 }
+{ "_id" : ObjectId("614aad603e1fd0dc7f348398"), "regNo" : 8, "Name" : "Arathi", "age" : 20 }
+{ "_id" : ObjectId("614aad603e1fd0dc7f348399"), "regNo" : 9, "Name" : "Aswathi", "age" : 24 }
+{ "_id" : ObjectId("614aad603e1fd0dc7f34839a"), "regNo" : 10, "Name" : "Aswanth", "age" : 21 }
+> db.db_cs.find().pretty();
+{
+        "_id" : ObjectId("614aaae23e1fd0dc7f348391"),
+        "regNo" : 1,
+        "Name" : "Aswana",
+        "age" : 20
+}
+{
+        "_id" : ObjectId("614aaae23e1fd0dc7f348392"),
+        "regNo" : 2,
+        "Name" : "Rahul",
+        "age" : 18
+}
+{
+        "_id" : ObjectId("614aaae23e1fd0dc7f348393"),
+        "regNo" : 3,
+        "Name" : "Rupesh",
+        "age" : 20
+}
+{
+        "_id" : ObjectId("614aaae23e1fd0dc7f348394"),
+        "regNo" : 4,
+        "Name" : "Ammu",
+        "age" : 16
+}
+{
+        "_id" : ObjectId("614aad603e1fd0dc7f348395"),
+        "regNo" : 5,
+        "Name" : "Achu",
+        "age" : 22
+}
+{
+        "_id" : ObjectId("614aad603e1fd0dc7f348396"),
+        "regNo" : 6,
+        "Name" : "Aru",
+        "age" : 16
+}
+{
+        "_id" : ObjectId("614aad603e1fd0dc7f348397"),
+        "regNo" : 7,
+        "Name" : "Anusree",
+        "age" : 21
+}
+{
+        "_id" : ObjectId("614aad603e1fd0dc7f348398"),
+        "regNo" : 8,
+        "Name" : "Arathi",
+        "age" : 20
+}
+{
+        "_id" : ObjectId("614aad603e1fd0dc7f348399"),
+        "regNo" : 9,
+        "Name" : "Aswathi",
+        "age" : 24
+}
+{
+        "_id" : ObjectId("614aad603e1fd0dc7f34839a"),
+        "regNo" : 10,
+        "Name" : "Aswanth",
+        "age" : 21
+}
+> db.db_cs.find().limit(5);
+{ "_id" : ObjectId("614aaae23e1fd0dc7f348391"), "regNo" : 1, "Name" : "Aswana", "age" : 20 }
+{ "_id" : ObjectId("614aaae23e1fd0dc7f348392"), "regNo" : 2, "Name" : "Rahul", "age" : 18 }
+{ "_id" : ObjectId("614aaae23e1fd0dc7f348393"), "regNo" : 3, "Name" : "Rupesh", "age" : 20 }
+{ "_id" : ObjectId("614aaae23e1fd0dc7f348394"), "regNo" : 4, "Name" : "Ammu", "age" : 16 }
+{ "_id" : ObjectId("614aad603e1fd0dc7f348395"), "regNo" : 5, "Name" : "Achu", "age" : 22 }
+
+> db.db_cs.find().skip(2)
+{ "_id" : ObjectId("614aaae23e1fd0dc7f348393"), "regNo" : 3, "Name" : "Rupesh", "age" : 20 }
+{ "_id" : ObjectId("614aaae23e1fd0dc7f348394"), "regNo" : 4, "Name" : "Ammu", "age" : 16 }
+{ "_id" : ObjectId("614aad603e1fd0dc7f348395"), "regNo" : 5, "Name" : "Achu", "age" : 22 }
+{ "_id" : ObjectId("614aad603e1fd0dc7f348396"), "regNo" : 6, "Name" : "Aru", "age" : 16 }
+{ "_id" : ObjectId("614aad603e1fd0dc7f348397"), "regNo" : 7, "Name" : "Anusree", "age" : 21 }
+{ "_id" : ObjectId("614aad603e1fd0dc7f348398"), "regNo" : 8, "Name" : "Arathi", "age" : 20 }
+{ "_id" : ObjectId("614aad603e1fd0dc7f348399"), "regNo" : 9, "Name" : "Aswathi", "age" : 24 }
+{ "_id" : ObjectId("614aad603e1fd0dc7f34839a"), "regNo" : 10, "Name" : "Aswanth", "age" : 21 }
+
+
+> db.db_cs.find().sort({"regNo":-1});
+{ "_id" : ObjectId("614aad603e1fd0dc7f34839a"), "regNo" : 10, "Name" : "Aswanth", "age" : 21 }
+{ "_id" : ObjectId("614aad603e1fd0dc7f348399"), "regNo" : 9, "Name" : "Aswathi", "age" : 24 }
+{ "_id" : ObjectId("614aad603e1fd0dc7f348398"), "regNo" : 8, "Name" : "Arathi", "age" : 20 }
+{ "_id" : ObjectId("614aad603e1fd0dc7f348397"), "regNo" : 7, "Name" : "Anusree", "age" : 21 }
+{ "_id" : ObjectId("614aad603e1fd0dc7f348396"), "regNo" : 6, "Name" : "Aru", "age" : 16 }
+{ "_id" : ObjectId("614aad603e1fd0dc7f348395"), "regNo" : 5, "Name" : "Achu", "age" : 22 }
+{ "_id" : ObjectId("614aaae23e1fd0dc7f348394"), "regNo" : 4, "Name" : "Ammu", "age" : 16 }
+{ "_id" : ObjectId("614aaae23e1fd0dc7f348393"), "regNo" : 3, "Name" : "Rupesh", "age" : 20 }
+{ "_id" : ObjectId("614aaae23e1fd0dc7f348392"), "regNo" : 2, "Name" : "Rahul", "age" : 18 }
+{ "_id" : ObjectId("614aaae23e1fd0dc7f348391"), "regNo" : 1, "Name" : "Aswana", "age" : 20 }
+
+> db.db_cs.remove({ "_id" : ObjectId("614aad603e1fd0dc7f34839a")})
+WriteResult({ "nRemoved" : 1 })
+
+> db.dropedb_cs
+MyCev.dropedb_cs
+
+> db.dropMyCev;
+MyCev.dropMyCev
+>

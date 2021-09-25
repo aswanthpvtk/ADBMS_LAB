@@ -1,0 +1,143 @@
+I. Consider the Company database with following tables:
+
+      1. Employee 
+
+         Emp_No (PRIMARY KEY)
+         Emp_Name
+         Address
+         Sex
+         Dept 
+         Salary
+         DOJ
+         Branch
+
+     2.	Department
+
+        Dept_No (Primary Key)
+        DName
+        Mgr_Id
+        Mgr_Strtdate
+
+
+     Perform the following: 
+       1. Create Company database 
+       2. Viewing all databases 
+       3. Viewing all Tables in a Database, 
+       4. Creating Tables (With and Without Constraints) 
+       5. Inserting/Updating/Deleting Records in a Table 
+       6. Saving (Commit) and Undoing (rollback) 
+
+
+
+mysql> create database Company;
+Query OK, 1 row affected (0.15 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| company            |
+| employeesdb        |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+6 rows in set (0.00 sec)
+mysql> use Company;
+Database changed
+mysql> create table Employee(Emp_No int not null primary key,
+    -> Emp_Name varchar(20) not null,
+    -> Address varchar(50) not null,
+    -> Sex varchar(10),Dept varchar(25),
+    -> Salary int ,DOJ date not null,
+    -> Branch varchar(30));
+Query OK, 0 rows affected (1.52 sec)
+
+mysql> create table Department(Dept_No int not null primary key,
+    -> DName varchar(25) not null,Mgr_id int not null,
+    -> Mgr_Strtdate date);
+Query OK, 0 rows affected (0.51 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_company |
++-------------------+
+| department        |
+| employee          |
++-------------------+
+2 rows in set (0.33 sec)
+
+mysql> insert into Employee
+    -> values
+    -> (101,"Ammu","Vatakara","female","Developer",30000,"2001-03-12","calicut"),
+    -> (102,"Martin","kochi","male","Tester",35000,"2000-08-24","Ernakulam"),
+    -> (103,"Anu","Koyilandy","female","Designer",25000,"1986-12-31","calicut"),
+    -> (104,"Arun","Edappally","male","Developer",30000,"1998-10-22","Kochi"),
+    -> (105,"Aswathi","Vatakara","female","Designer",25000,"2004-04-02","calicut");
+Query OK, 5 rows affected (0.21 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from Employee;
++--------+----------+-----------+--------+-----------+--------+------------+-----------+
+| Emp_No | Emp_Name | Address   | Sex    | Dept      | Salary | DOJ        | Branch    |
++--------+----------+-----------+--------+-----------+--------+------------+-----------+
+|    101 | Ammu     | Vatakara  | female | Developer |  30000 | 2001-03-12 | calicut   |
+|    102 | Martin   | kochi     | male   | Tester    |  35000 | 2000-08-24 | Ernakulam |
+|    103 | Anu      | Koyilandy | female | Designer  |  25000 | 1986-12-31 | calicut   |
+|    104 | Arun     | Edappally | male   | Developer |  30000 | 1998-10-22 | Kochi     |
+|    105 | Aswathi  | Vatakara  | female | Designer  |  25000 | 2004-04-02 | calicut   |
++--------+----------+-----------+--------+-----------+--------+------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql>  insert into Department
+    -> values
+    -> (0001,"Finance",01,"1999-03-12"),
+    -> (0002,"HR",02,"1984-08-22"),
+    -> (0003,"Testing",03,"2000-10-26"),
+    -> (0004,"Designing",04,"1995-12-30"),
+    -> (0005,"Maintanence",05,"1997-05-25");
+Query OK, 5 rows affected (0.14 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from Department;
++---------+-------------+--------+--------------+
+| Dept_No | DName       | Mgr_id | Mgr_Strtdate |
++---------+-------------+--------+--------------+
+|       1 | Finance     |      1 | 1999-03-12   |
+|       2 | HR          |      2 | 1984-08-22   |
+|       3 | Testing     |      3 | 2000-10-26   |
+|       4 | Designing   |      4 | 1995-12-30   |
+|       5 | Maintanence |      5 | 1997-05-25   |
++---------+-------------+--------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> update Department
+    -> set Dname="Developing"
+    -> where Dept_No=0005;
+Query OK, 1 row affected (0.14 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select DName from Department
+    -> where Dept_No=0005;
++------------+
+| DName      |
++------------+
+| Developing |
++------------+
+1 row in set (0.06 sec)
+
+mysql> delete from Department
+    -> where Dept_No=2;
+Query OK, 1 row affected (0.11 sec)
+
+mysql> select * from Department;
++---------+------------+--------+--------------+
+| Dept_No | DName      | Mgr_id | Mgr_Strtdate |
++---------+------------+--------+--------------+
+|       1 | Finance    |      1 | 1999-03-12   |
+|       3 | Testing    |      3 | 2000-10-26   |
+|       4 | Designing  |      4 | 1995-12-30   |
+|       5 | Developing |      5 | 1997-05-25   |
++---------+------------+--------+--------------+
+4 rows in set (0.02 sec)
