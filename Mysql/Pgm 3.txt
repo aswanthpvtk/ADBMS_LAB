@@ -1,0 +1,141 @@
+III. Consider the Employee table
+ 
+     1. Display all the fields of the Employee table 
+     2. Retrieve employee number and their salary 
+     3. Retrieve average salary of all employee 
+     4. Retrieve number of employee 
+     5. Retrieve distinct number of employee 
+     6. Retrieve total salary of employee group by employee name and count    similar names 
+     7. Retrieve total salary of employee which is greater than >12000 
+     8. Display name of employee in descending order 
+     9. Display details of employee whose name is ‘Martin’ and salary 
+         greater than  20000
+
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| bank               |
+| bank1              |
+| company            |
+| company1           |
+| employeesdb        |
+| information_schema |
+| insurance          |
+| library            |
+| mysql              |
+| performance_schema |
+| student            |
+| sys                |
++--------------------+
+12 rows in set (0.99 sec)
+
+mysql> use company;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_company |
++-------------------+
+| employee          |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> describe employee;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| Emp_No   | int         | NO   | PRI | NULL    |       |
+| Emp_Name | varchar(20) | NO   |     | NULL    |       |
+| Address  | varchar(50) | NO   |     | NULL    |       |
+| Sex      | varchar(10) | YES  |     | NULL    |       |
+| Dept     | varchar(25) | YES  |     | NULL    |       |
+| Salary   | int         | YES  |     | NULL    |       |
+| DOJ      | date        | NO   |     | NULL    |       |
+| Branch   | varchar(30) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+8 rows in set (0.15 sec)
+
+mysql> select * from employee;
++--------+----------+-----------+--------+-----------+--------+------------+-----------+
+| Emp_No | Emp_Name | Address   | Sex    | Dept      | Salary | DOJ        | Branch    |
++--------+----------+-----------+--------+-----------+--------+------------+-----------+
+|    101 | Ammu     | Vatakara  | female | Developer |  30000 | 2001-03-12 | calicut   |
+|    102 | Martin   | kochi     | male   | Tester    |  35000 | 2000-08-24 | Ernakulam |
+|    103 | Anu      | Koyilandy | female | Designer  |  25000 | 1986-12-31 | calicut   |
+|    104 | Arun     | Edappally | male   | Developer |  30000 | 1998-10-22 | Kochi     |
+|    105 | Aswathi  | Vatakara  | female | Designer  |  25000 | 2004-04-02 | calicut   |
++--------+----------+-----------+--------+-----------+--------+------------+-----------+
+5 rows in set (0.20 sec)
+
+mysql> select Emp_No,Salary from employee;
++--------+--------+
+| Emp_No | Salary |
++--------+--------+
+|    101 |  30000 |
+|    102 |  35000 |
+|    103 |  25000 |
+|    104 |  30000 |
+|    105 |  25000 |
++--------+--------+
+5 rows in set (0.00 sec)
+
+mysql>  select avg(Salary) as 'average salary' from employee;
++----------------+
+| average salary |
++----------------+
+|     29000.0000 |
++----------------+
+1 row in set (0.06 sec)
+
+mysql> select count(*) from employee;
++----------+
+| count(*) |
++----------+
+|        5 |
++----------+
+1 row in set (0.13 sec)
+
+mysql>  select distinct count(*) from employee;
++----------+
+| count(*) |
++----------+
+|        5 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select sum(salary) as 'total salary' from employee
+    -> group by Emp_Name
+    -> having count(Emp_Name)>1;
+Empty set (0.05 sec)
+
+mysql> select sum(salary) from employee
+    -> where Salary>12000;
++-------------+
+| sum(salary) |
++-------------+
+|      145000 |
++-------------+
+1 row in set (0.02 sec)
+
+mysql> select Emp_Name from employee
+    -> order by Emp_Name desc;
++----------+
+| Emp_Name |
++----------+
+| Martin   |
+| Aswathi  |
+| Arun     |
+| Anu      |
+| Ammu     |
++----------+
+5 rows in set (0.04 sec)
+
+mysql> select *from employee
+    ->  where Emp_Name='Martin' and Salary>20000;
++--------+----------+---------+------+--------+--------+------------+-----------+
+| Emp_No | Emp_Name | Address | Sex  | Dept   | Salary | DOJ        | Branch    |
++--------+----------+---------+------+--------+--------+------------+-----------+
+|    102 | Martin   | kochi   | male | Tester |  35000 | 2000-08-24 | Ernakulam |
++--------+----------+---------+------+--------+--------+------------+-----------+
+1 row in set (0.00 sec)

@@ -1,3 +1,18 @@
+I. Install and configure MongoDB
+II. Build sample collections/documents to perform query operation.
+
+    i.Create a database (Eg : MyCev)
+   ii.Create a collection (Eg: db_mca)
+  iii.Create a collection (Eg: db_cs)
+   iv.Insert 10 data to the collection
+    v.List the first 5 data from the collection (limit)
+   vi.List the entire data except first 2 data (skip)
+  vii.Sort the data by choosing any field in the collection
+ viii.Delete data from the collection
+   ix.Drop the collection (db_cs)
+    x.Drop Database
+
+
 > use MyCev;
 switched to db MyCev
 > db.createCollection("db_mca");

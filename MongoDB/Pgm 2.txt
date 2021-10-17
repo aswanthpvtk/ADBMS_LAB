@@ -1,3 +1,15 @@
+III. Design a  Databases using MongoDB and perform CRUD operations.
+
+      i. Create a database Myclass.
+     ii. Create a collection named “db_students” Should contain this fields : { student_name,    student_rollno, mark[subject, mark] }
+          Nb: Mark should be stored as array
+    iii. Insert details of 10 students in a class
+     iv. List the entire students in the class
+      v. Update mark of any students in the collection “db_students”
+     vi. Delete the data of first student in the collection
+
+
+
 > use Myclass
 switched to db Myclass
 > db.createCollection("db_student")
@@ -153,24 +165,3 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 
 > db.db_student.remove({ "_id" : ObjectId("614abff53e1fd0dc7f34839b")})
 WriteResult({ "nRemoved" : 1 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

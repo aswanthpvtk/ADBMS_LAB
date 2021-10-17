@@ -1,0 +1,75 @@
+2. Given Library Book Management database schema with Student database schema. In these database, create a trigger so that if any student borrows a 
+   book from library then the count of that specified book should be decremented. 
+
+  +-----+-------------+--------+ 
+  | bid | btitle      | copies | 
+  +-----+-------------+--------+ 
+  |   1 | Java        |     10 | 
+  |   2 | C++         |      5 | 
+  |   3 | MySql       |     10 | 
+  |   4 | Oracle DBMS |      5 | 
+  +-----+-------------+--------+ 
+
+
+mysql> create database Library;
+Query OK, 1 row affected (0.29 sec)
+
+mysql> use Library;
+Database changed
+
+mysql> create table book(bid int primary key not null,
+    -> btitle varchar(15),copies int);
+Query OK, 0 rows affected (1.73 sec)
+
+mysql> insert into book values(1,"Java",10),
+    -> (2,"C++",5),(3,"MySql",10),(4,"Oracle DBMS",5);
+Query OK, 4 rows affected (0.18 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from book
+    -> ;
++-----+-------------+--------+
+| bid | btitle      | copies |
++-----+-------------+--------+
+|   1 | Java        |     10 |
+|   2 | C++         |      5 |
+|   3 | MySql       |     10 |
+|   4 | Oracle DBMS |      5 |
++-----+-------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> create table book_issue(sid int primary key not null,
+    -> bid int not null,copies int);
+Query OK, 0 rows affected (0.54 sec)
+
+mysql> create trigger book_details
+    -> before insert on book_issue
+    -> for each row
+    -> update book set copies=copies-1
+    -> where bid=new.bid;
+Query OK, 0 rows affected (0.39 sec)
+
+mysql> insert into book_issue
+    -> values(101,3,1),(104,1,2);
+Query OK, 2 rows affected (0.34 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from book_issue;
++-----+-----+--------+
+| sid | bid | copies |
++-----+-----+--------+
+| 101 |   3 |      1 |
+| 104 |   1 |      2 |
++-----+-----+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from book;
++-----+-------------+--------+
+| bid | btitle      | copies |
++-----+-------------+--------+
+|   1 | Java        |      9 |
+|   2 | C++         |      5 |
+|   3 | MySql       |      9 |
+|   4 | Oracle DBMS |      5 |
++-----+-------------+--------+
+4 rows in set (0.00 sec)

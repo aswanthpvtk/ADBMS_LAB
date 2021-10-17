@@ -51,7 +51,7 @@ mysql> create trigger stud_marks
 Query OK, 0 rows affected (0.26 sec)
 
 mysql> insert into Std_Data(sid,name,subj1,subj2,subj3)
-    -> values(1,"Aswana",18,17,15),
+    -> values(1,"Aswanth",18,17,15),
     -> (2,"Arun",16,14,19),
     -> (3,"Ammu",12,15,17);
 Query OK, 3 rows affected (0.48 sec)
@@ -61,7 +61,7 @@ mysql> select * from Std_Data;
 +-----+--------+-------+-------+-------+-------+------+
 | sid | name   | subj1 | subj2 | subj3 | total | per  |
 +-----+--------+-------+-------+-------+-------+------+
-|   1 | Aswana |    18 |    17 |    15 |    50 |   83 |
+|   1 | Aswanth |    18 |    17 |    15 |    50 |   83 |
 |   2 | Arun   |    16 |    14 |    19 |    49 |   82 |
 |   3 | Ammu   |    12 |    15 |    17 |    44 |   73 |
 +-----+--------+-------+-------+-------+-------+------+
